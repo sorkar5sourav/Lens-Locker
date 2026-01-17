@@ -43,9 +43,15 @@ export async function addGearAction(formData) {
     await gear.save();
     
     revalidatePath('/gear');
-    redirect('/gear');
   } catch (error) {
+    // Don't catch redirect errors - they are intentional
+    if (error.message?.includes('NEXT_REDIRECT')) {
+      throw error;
+    }
     throw new Error('Failed to add gear: ' + error.message);
   }
+  
+  // Redirect after successful save (outside try-catch so redirect error isn't caught)
+  redirect('/gear');
 }
 

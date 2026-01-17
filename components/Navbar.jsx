@@ -26,11 +26,11 @@ export default function Navbar() {
   const isActive = (path) => pathname === path;
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-[#1E293B] shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-blue-600">LensLocker</span>
+            <span className="text-2xl font-bold text-[#06B6D4]">LensLocker</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -39,8 +39,8 @@ export default function Navbar() {
               href="/"
               className={`px-3 py-2 rounded-md text-sm font-medium ${
                 isActive('/')
-                  ? 'text-blue-600 bg-blue-50'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  ? 'text-[#3B82F6] bg-[#0F172A]'
+                  : 'text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]'
               }`}
             >
               Home
@@ -49,8 +49,8 @@ export default function Navbar() {
               href="/gear"
               className={`px-3 py-2 rounded-md text-sm font-medium ${
                 isActive('/gear')
-                  ? 'text-blue-600 bg-blue-50'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  ? 'text-[#3B82F6] bg-[#0F172A]'
+                  : 'text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]'
               }`}
             >
               Browse Gear
@@ -60,8 +60,8 @@ export default function Navbar() {
                 href="/gear/add"
                 className={`px-3 py-2 rounded-md text-sm font-medium ${
                   isActive('/gear/add')
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-[#3B82F6] bg-[#0F172A]'
+                    : 'text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]'
                 }`}
               >
                 Add Gear
@@ -74,14 +74,14 @@ export default function Navbar() {
             {isAuthenticated ? (
               <Link
                 href="/logout"
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600"
+                className="px-4 py-2 text-sm font-medium text-[#F8FAFC] hover:text-[#3B82F6]"
               >
                 Logout
               </Link>
             ) : (
               <Link
                 href="/login"
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                className="px-4 py-2 text-sm font-medium text-[#F8FAFC] bg-[#3B82F6] rounded-md hover:bg-[#2563EB]"
               >
                 Login
               </Link>
@@ -91,7 +91,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#3B82F6]"
             aria-controls="mobile-menu"
             aria-expanded="false"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -132,13 +132,13 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden" id="mobile-menu">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-[#334155]">
               <Link
                 href="/"
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
                   isActive('/')
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-[#3B82F6] bg-[#0F172A]'
+                    : 'text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -148,8 +148,8 @@ export default function Navbar() {
                 href="/gear"
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
                   isActive('/gear')
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-[#3B82F6] bg-[#0F172A]'
+                    : 'text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -160,8 +160,8 @@ export default function Navbar() {
                   href="/gear/add"
                   className={`block px-3 py-2 rounded-md text-base font-medium ${
                     isActive('/gear/add')
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      ? 'text-[#3B82F6] bg-[#0F172A]'
+                      : 'text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]'
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -169,11 +169,11 @@ export default function Navbar() {
                 </Link>
               )}
             </div>
-            <div className="pt-4 pb-3 border-t border-gray-200">
+            <div className="pt-4 pb-3 border-t border-[#334155]">
               {isAuthenticated ? (
                 <Link
                   href="/logout"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Logout
@@ -181,7 +181,7 @@ export default function Navbar() {
               ) : (
                 <Link
                   href="/login"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-[#F8FAFC] bg-[#3B82F6] hover:bg-[#2563EB]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Login

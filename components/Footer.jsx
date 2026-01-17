@@ -2,19 +2,19 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-[#1E293B] text-[#F8FAFC]">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-2xl font-bold mb-4">LensLocker</h3>
-            <p className="text-gray-400 mb-4">
+            <p className="text-[#94A3B8] mb-4">
               The peer-to-peer marketplace for camera gear rentals.
             </p>
             {/* Social Media Links */}
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
                 aria-label="Twitter"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -53,19 +53,19 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-[#94A3B8]">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <Link href="/" className="hover:text-[#06B6D4] transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/gear" className="hover:text-white transition-colors">
+                <Link href="/gear" className="hover:text-[#06B6D4] transition-colors">
                   Browse Gear
                 </Link>
               </li>
               <li>
-                <Link href="/gear/add" className="hover:text-white transition-colors">
+                <Link href="/gear/add" className="hover:text-[#06B6D4] transition-colors">
                   List Your Gear
                 </Link>
               </li>
@@ -74,19 +74,19 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-[#94A3B8]">
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
                   Safety
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
                   Insurance
                 </Link>
               </li>
@@ -95,19 +95,19 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold mb-4">Connect</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-[#94A3B8]">
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
                   Blog
                 </Link>
               </li>
@@ -115,7 +115,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <div className="border-t border-[#334155] mt-8 pt-8 text-center text-[#94A3B8]">
           <p>&copy; {new Date().getFullYear()} LensLocker. All rights reserved.</p>
         </div>
       </div>

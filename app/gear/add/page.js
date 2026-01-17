@@ -23,6 +23,10 @@ export default function AddGearPage() {
         toast.success('Gear added successfully!');
         // Redirect will happen via server action
       } catch (err) {
+        // Don't treat redirect as an error - Next.js handles it internally
+        if (err.message?.includes('NEXT_REDIRECT') || err.digest === 'NEXT_REDIRECT') {
+          return; // Let Next.js handle the redirect
+        }
         const errorMessage = err.message || 'Failed to add gear. Please try again.';
         setError(errorMessage);
         toast.error(errorMessage);
@@ -31,20 +35,20 @@ export default function AddGearPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-[#0F172A] py-12">
       <Toaster position="top-right" />
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Add New Gear</h1>
-          <p className="text-gray-600">List your camera equipment for rent</p>
+          <h1 className="text-4xl font-bold text-[#F8FAFC] mb-2">Add New Gear</h1>
+          <p className="text-[#94A3B8]">List your camera equipment for rent</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="bg-[#1E293B] rounded-lg shadow-lg p-8 space-y-6">
           {error && (
-            <div className="rounded-md bg-red-50 p-4 border border-red-200">
+            <div className="rounded-md bg-red-900/30 p-4 border border-red-800">
               <div className="flex">
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-red-800">{error}</h3>
+                  <h3 className="text-sm font-medium text-red-300">{error}</h3>
                 </div>
               </div>
             </div>
@@ -52,11 +56,11 @@ export default function AddGearPage() {
 
           {/* Basic Information */}
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Basic Information</h2>
+            <h2 className="text-xl font-semibold text-[#F8FAFC] mb-4">Basic Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="md:col-span-3">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Gear Name <span className="text-red-500">*</span>
+                <label htmlFor="name" className="block text-sm font-medium text-[#94A3B8] mb-2">
+                  Gear Name <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -64,14 +68,14 @@ export default function AddGearPage() {
                   name="name"
                   required
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., Canon EOS R5"
                 />
               </div>
 
               <div>
-                <label htmlFor="brand" className="block text-sm font-medium text-gray-700 mb-2">
-                  Brand <span className="text-red-500">*</span>
+                <label htmlFor="brand" className="block text-sm font-medium text-[#94A3B8] mb-2">
+                  Brand <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -79,14 +83,14 @@ export default function AddGearPage() {
                   name="brand"
                   required
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., Canon"
                 />
               </div>
 
               <div>
-                <label htmlFor="model" className="block text-sm font-medium text-gray-700 mb-2">
-                  Model <span className="text-red-500">*</span>
+                <label htmlFor="model" className="block text-sm font-medium text-[#94A3B8] mb-2">
+                  Model <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -94,21 +98,21 @@ export default function AddGearPage() {
                   name="model"
                   required
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., EOS R5"
                 />
               </div>
 
               <div>
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
-                  Category <span className="text-red-500">*</span>
+                <label htmlFor="category" className="block text-sm font-medium text-[#94A3B8] mb-2">
+                  Category <span className="text-red-400">*</span>
                 </label>
                 <select
                   id="category"
                   name="category"
                   required
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                 >
                   <option value="">Select category</option>
                   <option value="DSLR">DSLR</option>
@@ -124,8 +128,8 @@ export default function AddGearPage() {
 
           {/* Description */}
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-              Description <span className="text-red-500">*</span>
+            <label htmlFor="description" className="block text-sm font-medium text-[#94A3B8] mb-2">
+              Description <span className="text-red-400">*</span>
             </label>
             <textarea
               id="description"
@@ -133,21 +137,21 @@ export default function AddGearPage() {
               required
               disabled={isPending}
               rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+              className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
               placeholder="Describe your gear, its condition, and any special features..."
             />
           </div>
 
           {/* Pricing & Image */}
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Pricing & Media</h2>
+            <h2 className="text-xl font-semibold text-[#F8FAFC] mb-4">Pricing & Media</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="dailyRate" className="block text-sm font-medium text-gray-700 mb-2">
-                  Daily Rate (USD) <span className="text-red-500">*</span>
+                <label htmlFor="dailyRate" className="block text-sm font-medium text-[#94A3B8] mb-2">
+                  Daily Rate (USD) <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                  <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#94A3B8]">$</span>
                   <input
                     type="number"
                     id="dailyRate"
@@ -156,15 +160,15 @@ export default function AddGearPage() {
                     min="0"
                     step="0.01"
                     disabled={isPending}
-                    className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                    className="w-full pl-8 pr-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                     placeholder="0.00"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
-                  Image URL <span className="text-red-500">*</span>
+                <label htmlFor="image" className="block text-sm font-medium text-[#94A3B8] mb-2">
+                  Image URL <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="url"
@@ -172,7 +176,7 @@ export default function AddGearPage() {
                   name="image"
                   required
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="https://example.com/image.jpg"
                 />
               </div>
@@ -181,10 +185,10 @@ export default function AddGearPage() {
 
           {/* Specifications */}
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Specifications</h2>
+            <h2 className="text-xl font-semibold text-[#F8FAFC] mb-4">Specifications</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="resolution" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="resolution" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   Resolution
                 </label>
                 <input
@@ -192,13 +196,13 @@ export default function AddGearPage() {
                   id="resolution"
                   name="resolution"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., 45MP"
                 />
               </div>
 
               <div>
-                <label htmlFor="sensor" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="sensor" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   Sensor
                 </label>
                 <input
@@ -206,13 +210,13 @@ export default function AddGearPage() {
                   id="sensor"
                   name="sensor"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., Full Frame CMOS"
                 />
               </div>
 
               <div>
-                <label htmlFor="iso" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="iso" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   ISO Range
                 </label>
                 <input
@@ -220,13 +224,13 @@ export default function AddGearPage() {
                   id="iso"
                   name="iso"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., 100-51200"
                 />
               </div>
 
               <div>
-                <label htmlFor="weight" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="weight" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   Weight
                 </label>
                 <input
@@ -234,7 +238,7 @@ export default function AddGearPage() {
                   id="weight"
                   name="weight"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., 650g"
                 />
               </div>
@@ -243,10 +247,10 @@ export default function AddGearPage() {
 
           {/* Location */}
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Location</h2>
+            <h2 className="text-xl font-semibold text-[#F8FAFC] mb-4">Location</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="city" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   City
                 </label>
                 <input
@@ -254,13 +258,13 @@ export default function AddGearPage() {
                   id="city"
                   name="city"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., New York"
                 />
               </div>
 
               <div>
-                <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="state" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   State
                 </label>
                 <input
@@ -268,13 +272,13 @@ export default function AddGearPage() {
                   id="state"
                   name="state"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., NY"
                 />
               </div>
 
               <div>
-                <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="zipCode" className="block text-sm font-medium text-[#94A3B8] mb-2">
                   ZIP Code
                 </label>
                 <input
@@ -282,7 +286,7 @@ export default function AddGearPage() {
                   id="zipCode"
                   name="zipCode"
                   disabled={isPending}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100"
+                  className="w-full px-4 py-2 border border-[#334155] bg-[#0F172A] text-[#F8FAFC] rounded-lg focus:ring-2 focus:ring-[#3B82F6] focus:border-[#3B82F6] disabled:bg-[#334155] disabled:opacity-50"
                   placeholder="e.g., 10001"
                 />
               </div>
@@ -290,17 +294,17 @@ export default function AddGearPage() {
           </div>
 
           {/* Form Actions */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-[#334155]">
             <button
               type="submit"
               disabled={isPending}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 bg-[#3B82F6] hover:bg-[#2563EB] text-[#F8FAFC] font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPending ? 'Adding Gear...' : 'Add Gear'}
             </button>
             <Link
               href="/gear"
-              className="flex-1 text-center bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+              className="flex-1 text-center bg-[#334155] hover:bg-[#475569] text-[#F8FAFC] font-semibold py-3 px-6 rounded-lg transition-colors"
             >
               Cancel
             </Link>
