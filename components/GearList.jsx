@@ -1,18 +1,23 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/utils';
 
 const CATEGORIES = ['all', 'DSLR', 'Mirrorless', 'Drones', 'Lighting', 'Lenses', 'Accessories'];
 
 export default function GearList() {
+  const searchParams = useSearchParams();
   const [gear, setGear] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState(() => {
+    const categoryParam = searchParams.get('category');
+    return categoryParam && CATEGORIES.includes(categoryParam) ? categoryParam : 'all';
+  });
   const [searchInput, setSearchInput] = useState('');
   const observerTarget = useRef(null);
 
@@ -24,7 +29,7 @@ export default function GearList() {
     try {
       const params = new URLSearchParams({
         page: pageNum,
-        limit: 12,
+        limit: 8,
         category,
         ...(search && { search }),
       });
