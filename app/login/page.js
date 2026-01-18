@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const callbackUrl = searchParams.get('callbackUrl') || '/gear';
@@ -154,5 +154,19 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#0F172A]">
+        <div className="text-center">
+          <p className="text-muted">Loading...</p>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }

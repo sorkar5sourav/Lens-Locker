@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import GearList from '@/components/GearList';
 
 export const metadata = {
@@ -6,5 +7,15 @@ export const metadata = {
 };
 
 export default function GearPage() {
-  return <GearList />;
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#0F172A]">
+        <div className="text-center">
+          <p className="text-muted">Loading...</p>
+        </div>
+      </div>
+    }>
+      <GearList />
+    </Suspense>
+  );
 }
