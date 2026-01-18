@@ -19,14 +19,10 @@ export default function AddGearPage() {
 
     startTransition(async () => {
       try {
-        await addGearAction(formData);
+        const result = await addGearAction(formData);
         toast.success('Gear added successfully!');
-        // Redirect will happen via server action
+        router.push('/gear');
       } catch (err) {
-        // Don't treat redirect as an error - Next.js handles it internally
-        if (err.message?.includes('NEXT_REDIRECT') || err.digest === 'NEXT_REDIRECT') {
-          return; // Let Next.js handle the redirect
-        }
         const errorMessage = err.message || 'Failed to add gear. Please try again.';
         setError(errorMessage);
         toast.error(errorMessage);

@@ -31,5 +31,5 @@ const GearSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.models.Gear || mongoose.model('Gear', GearSchema);
-
+// Use 'gears' collection (MongoDB will pluralize by default, but we explicitly set it)
+export default mongoose.models.Gears || mongoose.model("Gears", GearSchema)

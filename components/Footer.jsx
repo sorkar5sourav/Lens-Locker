@@ -2,19 +2,19 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1E293B] text-[#F8FAFC]">
+    <footer className="bg-[#1E293B] text-[#F8FAFC] border-t border-slate-700 border-opacity-30">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-2xl font-bold mb-4">LensLocker</h3>
-            <p className="text-[#94A3B8] mb-4">
+            <h3 className="text-2xl font-bold font-space mb-4 text-brand-accent">LensLocker</h3>
+            <p className="body-text text-muted mb-4">
               The peer-to-peer marketplace for camera gear rentals.
             </p>
             {/* Social Media Links */}
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
+                className="text-muted hover:text-brand-accent transition-colors duration-300"
                 aria-label="Facebook"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
+                className="text-muted hover:text-brand-accent transition-colors duration-300"
                 aria-label="Twitter"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
+                className="text-muted hover:text-brand-accent transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-[#94A3B8] hover:text-[#06B6D4] transition-colors"
+                className="text-muted hover:text-brand-accent transition-colors duration-300"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -52,20 +52,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-[#94A3B8]">
+            <h4 className="font-semibold font-space mb-4 text-[#F8FAFC]">Quick Links</h4>
+            <ul className="space-y-2 text-muted">
               <li>
-                <Link href="/" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="/" className="hover:text-brand-accent transition-colors duration-300">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/gear" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="/gear" className="hover:text-brand-accent transition-colors duration-300">
                   Browse Gear
                 </Link>
               </li>
               <li>
-                <Link href="/gear/add" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="/gear/add" className="hover:text-brand-accent transition-colors duration-300">
                   List Your Gear
                 </Link>
               </li>
@@ -73,20 +73,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-2 text-[#94A3B8]">
+            <h4 className="font-semibold font-space mb-4 text-[#F8FAFC]">Support</h4>
+            <ul className="space-y-2 text-muted">
               <li>
-                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="#" className="hover:text-brand-accent transition-colors duration-300">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="#" className="hover:text-brand-accent transition-colors duration-300">
                   Safety
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="#" className="hover:text-brand-accent transition-colors duration-300">
                   Insurance
                 </Link>
               </li>
@@ -94,20 +94,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Connect</h4>
-            <ul className="space-y-2 text-[#94A3B8]">
+            <h4 className="font-semibold font-space mb-4 text-[#F8FAFC]">Connect</h4>
+            <ul className="space-y-2 text-muted">
               <li>
-                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="#" className="hover:text-brand-accent transition-colors duration-300">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="#" className="hover:text-brand-accent transition-colors duration-300">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-[#06B6D4] transition-colors">
+                <Link href="#" className="hover:text-brand-accent transition-colors duration-300">
                   Blog
                 </Link>
               </li>
@@ -115,7 +115,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[#334155] mt-8 pt-8 text-center text-[#94A3B8]">
+        <div className="border-t border-slate-700 border-opacity-30 mt-8 pt-8 text-center text-muted text-sm">
           <p>&copy; {new Date().getFullYear()} LensLocker. All rights reserved.</p>
         </div>
       </div>

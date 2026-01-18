@@ -1,21 +1,22 @@
 'use server';
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/db';
-import Gear from '@/models/Gear';
-import { revalidatePath } from 'next/cache';
+import Gears from '@/models/Gear';
 
 export async function addGearAction(formData) {
-  // Check authentication
-  const cookieStore = await cookies();
-  const session = cookieStore.get('session');
+  // Check authentication with NextAuth
+  const session = await getServerSession(authOptions);
   
-  if (!session || session.value !== 'true') {
-    throw new Error('Unauthorized');
+  if (!session?.user?.email) {
+    console.log('❌ Unauthorized: No session');
+    throw new Error('Unauthorized - Please login first');
   }
   
   try {
+    console.log(`📝 Adding gear for user: ${session.user.email}`);
+    
     await connectDB();
     
     const gearData = {
@@ -37,21 +38,18 @@ export async function addGearAction(formData) {
         state: formData.get('state'),
         zipCode: formData.get('zipCode'),
       },
+      ownerId: session.user.email,
+      isAvailable: true,
     };
     
-    const gear = new Gear(gearData);
+    const gear = new Gears(gearData);
     await gear.save();
     
-    revalidatePath('/gear');
+    console.log(`✅ Gear added successfully: ${gear._id}`);
+    return { success: true, gearId: gear._id.toString() };
   } catch (error) {
-    // Don't catch redirect errors - they are intentional
-    if (error.message?.includes('NEXT_REDIRECT')) {
-      throw error;
-    }
+    console.error('❌ Error adding gear:', error);
     throw new Error('Failed to add gear: ' + error.message);
   }
-  
-  // Redirect after successful save (outside try-catch so redirect error isn't caught)
-  redirect('/gear');
 }
 

@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 export async function GET(request) {
-  const cookieStore = await cookies();
-  cookieStore.delete('session');
-  
-  const url = new URL('/', request.url);
-  return NextResponse.redirect(url);
+  // NextAuth handles logout in client components via Navbar
+  return NextResponse.json({ message: 'Use client logout from navbar' }, { status: 200 });
 }
+
 

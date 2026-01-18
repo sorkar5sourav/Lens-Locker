@@ -1,35 +1,63 @@
 'use server';
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { getDB } from "@/lib/db";
+import bcrypt from "bcryptjs";
 
-export async function loginAction(formData) {
-  const email = formData.get('email');
-  const password = formData.get('password');
+export const postUser = async (payload) => {
+  console.log('🔄 Registering user:', payload.email);
   
-  const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '123456';
-  
-  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-    const cookieStore = await cookies();
-    cookieStore.set('session', 'true', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-      path: '/',
-    });
+  try {
+    // Get database connection
+    const db = await getDB();
+    const usersCollection = db.collection("users");
+
+    // Check if user already exists
+    const isExist = await usersCollection.findOne({ email: payload.email });
+    if (isExist) {
+      console.log('⚠️ User already exists:', payload.email);
+      return {
+        success: false,
+        message: "User already exists with this email",
+      };
+    }
+
+    // Hash password
+    const hashPassword = await bcrypt.hash(payload.password, 10);
+    const newUser = {
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone,
+      password: hashPassword,
+      image: payload.image || null,
+      role: payload.role || "user",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     
-    const redirectTo = formData.get('redirect') || '/gear';
-    redirect(redirectTo);
-  } else {
-    throw new Error('Invalid credentials');
+    console.log('📝 Creating user:', newUser.email);
+
+    // Insert user to database
+    const result = await usersCollection.insertOne(newUser);
+    
+    if (result.acknowledged) {
+      console.log('✅ User registered successfully:', result.insertedId.toString());
+      return {
+        success: true,
+        message: `User registered successfully! ID: ${result.insertedId.toString()}`,
+        userId: result.insertedId.toString(),
+      };
+    } else {
+      console.log('❌ Failed to insert user');
+      return {
+        success: false,
+        message: "Failed to register user. Please try again.",
+      };
+    }
+  } catch (error) {
+    console.error('❌ Registration error:', error);
+    return {
+      success: false,
+      message: error.message || "An error occurred during registration",
+    };
   }
-}
-
-export async function logoutAction() {
-  const cookieStore = await cookies();
-  cookieStore.delete('session');
-  redirect('/');
-}
-
+};

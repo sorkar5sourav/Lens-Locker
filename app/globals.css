@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 :root {
+  /* Colors */
   --bg: #0F172A;
   --surface: #1E293B;
   --primary: #3B82F6;
-  --accent: #06B6D4;
+  --brand-primary: #3B82F6; /* Electric Blue */
+  --brand-accent: #06B6D4; /* Cyan */
   --text: #F8FAFC;
   --muted: #94A3B8;
   
@@ -17,15 +19,112 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-primary: var(--primary);
-  --color-accent: var(--accent);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-accent: var(--brand-accent);
+  --color-accent: var(--brand-accent);
   --color-text: var(--text);
   --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-slate-700: #334155;
+  --font-sans: var(--font-inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  --font-space: var(--font-space, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  --font-mono: var(--font-geist-mono, monospace);
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.625; /* leading-relaxed */
+}
+
+/* Typography Scales */
+
+/* Hero Headlines */
+.hero-headline {
+  font-family: var(--font-space);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  letter-spacing: -0.02em; /* tracking-tighter */
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .hero-headline {
+    font-size: clamp(3rem, 8vw, 3.5rem);
+  }
+}
+
+/* Section Headers */
+.section-header {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.875rem;
+  color: var(--brand-primary);
+}
+
+/* Technical Specs */
+.tech-spec {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--brand-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+}
+
+/* Body Text with proper spacing */
+.body-text {
+  line-height: 1.625; /* leading-relaxed */
+  letter-spacing: 0;
+}
+
+/* Small Labels */
+.label-small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
 }

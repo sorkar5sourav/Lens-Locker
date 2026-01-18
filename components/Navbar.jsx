@@ -2,35 +2,27 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    // Check if session cookie exists
-    const checkAuth = () => {
-      const cookies = document.cookie.split(';');
-      const sessionCookie = cookies.find(cookie => cookie.trim().startsWith('session='));
-      setIsAuthenticated(sessionCookie?.includes('true') || false);
-    };
-    checkAuth();
-    
-    // Check periodically in case cookie changes
-    const interval = setInterval(checkAuth, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const isAuthenticated = status === 'authenticated';
 
   const isActive = (path) => pathname === path;
 
+  const handleLogout = async () => {
+    await signOut({ redirect: true, callbackUrl: '/' });
+  };
+
   return (
-    <nav className="bg-[#1E293B] shadow-lg sticky top-0 z-50">
+    <nav className="bg-[#1E293B] bg-opacity-80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-slate-700 border-opacity-30">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-[#06B6D4]">LensLocker</span>
+            <span className="text-2xl font-bold font-space text-[#06B6D4]">LensLocker</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -72,19 +64,32 @@ export default function Navbar() {
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             {isAuthenticated ? (
-              <Link
-                href="/logout"
-                className="px-4 py-2 text-sm font-medium text-[#F8FAFC] hover:text-[#3B82F6]"
-              >
-                Logout
-              </Link>
+              <>
+                <span className="text-sm text-muted">
+                  {session?.user?.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-sm font-medium text-[#F8FAFC] hover:text-brand-accent transition-colors"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
-              <Link
-                href="/login"
-                className="px-4 py-2 text-sm font-medium text-[#F8FAFC] bg-[#3B82F6] rounded-md hover:bg-[#2563EB]"
-              >
-                Login
-              </Link>
+              <>
+                <Link
+                  href="/login"
+                  className="px-4 py-2 text-sm font-medium text-[#F8FAFC] bg-brand-primary rounded-md hover:bg-[#2563EB] transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/registration"
+                  className="px-4 py-2 text-sm font-medium text-[#F8FAFC] bg-brand-accent rounded-md hover:bg-[#0891B2] transition-colors"
+                >
+                  Register
+                </Link>
+              </>
             )}
           </div>
 
@@ -169,19 +174,26 @@ export default function Navbar() {
                 </Link>
               )}
             </div>
-            <div className="pt-4 pb-3 border-t border-[#334155]">
+            <div className="pt-4 pb-3 border-t border-slate-700 border-opacity-30">
               {isAuthenticated ? (
-                <Link
-                  href="/logout"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-[#F8FAFC] hover:text-[#3B82F6] hover:bg-[#0F172A]"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Logout
-                </Link>
+                <div className="space-y-2">
+                  <p className="px-3 py-2 text-sm text-muted">
+                    {session?.user?.email}
+                  </p>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleLogout();
+                    }}
+                    className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-[#F8FAFC] hover:text-brand-accent hover:bg-[#0F172A] transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
               ) : (
                 <Link
                   href="/login"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-[#F8FAFC] bg-[#3B82F6] hover:bg-[#2563EB]"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-[#F8FAFC] bg-brand-primary hover:bg-[#2563EB] transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Login

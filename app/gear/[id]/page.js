@@ -13,7 +13,13 @@ async function getGearItem(id) {
       return null;
     }
     
-    return gear;
+    // Convert Mongoose documents to plain objects and ObjectIds to strings
+    return {
+      ...gear,
+      _id: gear._id?.toString() || gear._id,
+      createdAt: gear.createdAt?.toISOString() || gear.createdAt,
+      updatedAt: gear.updatedAt?.toISOString() || gear.updatedAt,
+    };
   } catch (error) {
     console.error('Error fetching gear item:', error);
     return null;
@@ -21,7 +27,8 @@ async function getGearItem(id) {
 }
 
 export default async function GearDetailPage({ params }) {
-  const gear = await getGearItem(params.id);
+  const { id } = await params;
+  const gear = await getGearItem(id);
 
   if (!gear) {
     notFound();
